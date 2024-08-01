@@ -1,5 +1,17 @@
 <!-- BEGIN_TF_DOCS -->
 
+## Providers
+
+No providers.
+## Inputs
+
+No inputs.
+## Resources
+
+No resources.
+## Outputs
+
+No outputs.
 # 🚀 Built by opsZero!
 
 <a href="https://opszero.com"><img src="https://opszero.com/wp-content/uploads/2024/07/opsZero_logo_svg.svg" width="300px"/></a>
@@ -31,16 +43,4 @@ Please [schedule a call](https://calendly.com/opszero-llc/discovery) if you need
   <img src="https://opszero.com/wp-content/uploads/2024/07/AWS-public-sector.png" width="150px" />
   <img src="https://opszero.com/wp-content/uploads/2024/07/AWS-eks.png" width="150px" />
 </div>
-## Providers
-
-No providers.
-## Inputs
-
-No inputs.
-## Resources
-
-No resources.
-## Outputs
-
-No outputs.
 <!-- END_TF_DOCS -->
