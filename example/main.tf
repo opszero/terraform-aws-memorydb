@@ -11,7 +11,6 @@ module "vpc" {
   enable_flow_log = false
 }
 
-
 module "subnets" {
   source             = "cypik/subnet/aws"
   version            = "1.0.1"
@@ -36,12 +35,20 @@ module "security_group" {
   new_sg_ingress_rules_with_cidr_blocks = [
     {
       rule_count  = 1
-      from_port   = 6379
-      to_port     = 6379
+      from_port   = 22
+      to_port     = 22
       protocol    = "tcp"
       cidr_blocks = ["172.16.0.0/16"]
       description = "Allow ssh traffic."
     },
+    {
+      rule_count  = 2
+      from_port   = 6379
+      to_port     = 6379
+      protocol    = "tcp"
+      cidr_blocks = ["172.16.0.0/16"]
+      description = "Allow MongoDB traffic."
+    }
   ]
 
   ## EGRESS Rules
@@ -57,14 +64,12 @@ module "security_group" {
   ]
 }
 
-
-
 ################################################################################
 # MemoryDB Module
 ###############################################################################
 
 module "memory_db" {
-  source = ".."
+  source = "../."
 
   # Cluster
   name                       = "memorydb"
@@ -81,6 +86,7 @@ module "memory_db" {
   maintenance_window       = "sun:23:00-mon:01:30"
   snapshot_retention_limit = 7
   snapshot_window          = "05:00-09:00"
+  password                 = "GS8ZU1Ff2hj8bjD5"
 
   # Users
   users = {
@@ -92,8 +98,7 @@ module "memory_db" {
     readonly = {
       user_name     = "readonly-user"
       access_string = "on ~* &* -@all +@read"
-      #      passwords     = [random_password.password.result]
-      tags = { user = "readonly" }
+      tags          = { user = "readonly" }
     }
   }
 
@@ -123,5 +128,3 @@ module "memory_db" {
   }
 
 }
-
-

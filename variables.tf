@@ -293,3 +293,9 @@ variable "subnet_group_tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "password" {
+  type        = string
+  default     = ""
+  description = "The password for the AWS MemoryDB user. Leave empty to generate a random password."
+}

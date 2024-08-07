@@ -83,11 +83,12 @@ resource "aws_memorydb_user" "this" {
 
   authentication_mode {
     type      = "password"
-    passwords = [random_password.main.result]
+    passwords = var.password == "" ? [random_password.main.result] : [var.password]
   }
 
   tags = module.labels.tags
 }
+
 
 ################################################################################
 # ACL
