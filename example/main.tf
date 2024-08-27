@@ -86,7 +86,7 @@ module "memory_db" {
   maintenance_window       = "sun:23:00-mon:01:30"
   snapshot_retention_limit = 7
   snapshot_window          = "05:00-09:00"
-  password                 = "GS8ZU1Ff2hj8bjD5"
+  password                 = "hgftrdgydr5d5"
 
   # Users
   users = {

@@ -69,6 +69,24 @@ resource "aws_sns_topic" "main" {
 
   tags = module.labels.tags
 }
+#################### secretsmanager  ############
+
+resource "aws_secretsmanager_secret" "memorydb_password" {
+  for_each = { for k, v in var.users : k => v if var.create && var.create_users }
+
+  name = "${each.value.user_name}_password"
+}
+
+resource "aws_secretsmanager_secret_version" "memorydb_password_version" {
+  for_each = { for k, v in var.users : k => v if var.create && var.create_users }
+
+  secret_id     = aws_secretsmanager_secret.memorydb_password[each.key].id
+  secret_string = jsonencode({
+    password = var.password == "" ? random_password.main.result : var.password
+  })
+}
+
+
 
 
 ################################################################################
@@ -83,7 +101,7 @@ resource "aws_memorydb_user" "this" {
 
   authentication_mode {
     type      = "password"
-    passwords = var.password == "" ? [random_password.main.result] : [var.password]
+    passwords = [aws_secretsmanager_secret_version.memorydb_password_version[each.key].secret_string]
   }
 
   tags = module.labels.tags
