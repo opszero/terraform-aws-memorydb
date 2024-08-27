@@ -1,33 +1,3 @@
-
-variable "environment" {
-  type        = string
-  default     = ""
-  description = "Environment (e.g. `prod`, `dev`, `staging`)."
-}
-
-variable "label_order" {
-  type        = list(any)
-  default     = ["name", "environment"]
-  description = "Label order, e.g. `name`,`application`."
-}
-
-variable "repository" {
-  type        = string
-  default     = "https://github.com/cypik/terraform-aws-security_group"
-  description = "Terraform current module repo"
-}
-
-variable "managedby" {
-  type        = string
-  default     = "cypik"
-  description = "ManagedBy, eg 'cypik'."
-}
-variable "create" {
-  description = "Determines whether resources will be created - affects all resources"
-  type        = bool
-  default     = true
-}
-
 variable "tags" {
   description = "A map of tags to use on all resources"
   type        = map(string)
@@ -42,12 +12,6 @@ variable "name" {
   description = "Cluster name - also default name used on all resources if more specific resource names are not provided"
   type        = string
   default     = ""
-}
-
-variable "use_name_prefix" {
-  description = "Determines whether `name` is used as a prefix for the cluster"
-  type        = bool
-  default     = false
 }
 
 variable "description" {
@@ -116,12 +80,6 @@ variable "maintenance_window" {
   default     = null
 }
 
-variable "sns_name" {
-  description = "ARN of the SNS topic to which cluster notifications are sent"
-  type        = string
-  default     = "memorydb-sns"
-}
-
 variable "snapshot_name" {
   description = "The name of a snapshot from which to restore data into the new cluster"
   type        = string
@@ -142,12 +100,6 @@ variable "snapshot_retention_limit" {
 
 variable "snapshot_window" {
   description = "The daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your shard. Example: `05:00-09:00`"
-  type        = string
-  default     = null
-}
-
-variable "final_snapshot_name" {
-  description = "Name of the final cluster snapshot to be created when this resource is deleted. If omitted, no final snapshot will be made"
   type        = string
   default     = null
 }
@@ -178,18 +130,6 @@ variable "users" {
 # ACL
 ################################################################################
 
-variable "create_acl" {
-  description = "Determines whether to create ACL specified"
-  type        = bool
-  default     = true
-}
-
-variable "acl_name" {
-  description = "Name of ACL to be created if `create_acl` is `true`, otherwise its the name of an existing ACL to use if `create_acl` is `false`"
-  type        = string
-  default     = null
-}
-
 variable "acl_use_name_prefix" {
   description = "Determines whether `acl_name` is used as a prefix"
   type        = bool
@@ -216,12 +156,6 @@ variable "create_parameter_group" {
   description = "Determines whether to create parameter group specified"
   type        = bool
   default     = true
-}
-
-variable "parameter_group_name" {
-  description = "Name of parameter group to be created if `create_parameter_group` is `true`, otherwise its the name of an existing parameter group to use if `create_parameter_group` is `false`"
-  type        = string
-  default     = null
 }
 
 variable "parameter_group_use_name_prefix" {
@@ -264,12 +198,6 @@ variable "create_subnet_group" {
   default     = true
 }
 
-variable "subnet_group_name" {
-  description = "Name of subnet group to be created if `create_subnet_group` is `true`, otherwise its the name of an existing subnet group to use if `create_subnet_group` is `false`"
-  type        = string
-  default     = null
-}
-
 variable "subnet_group_use_name_prefix" {
   description = "Determines whether `subnet_group_name` is used as a prefix"
   type        = bool
@@ -286,12 +214,6 @@ variable "subnet_ids" {
   description = "Set of VPC Subnet ID-s for the subnet group. At least one subnet must be provided"
   type        = list(string)
   default     = []
-}
-
-variable "subnet_group_tags" {
-  description = "Additional tags for the subnet group created"
-  type        = map(string)
-  default     = {}
 }
 
 variable "password" {
