@@ -10,12 +10,9 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_acl_tags"></a> [acl\_tags](#input\_acl\_tags) | Additional tags for the ACL created | `map(string)` | `{}` | no |
 | <a name="input_acl_use_name_prefix"></a> [acl\_use\_name\_prefix](#input\_acl\_use\_name\_prefix) | Determines whether `acl_name` is used as a prefix | `bool` | `false` | no |
 | <a name="input_acl_user_names"></a> [acl\_user\_names](#input\_acl\_user\_names) | List of externally created user names to associate with the ACL | `list(string)` | `[]` | no |
 | <a name="input_auto_minor_version_upgrade"></a> [auto\_minor\_version\_upgrade](#input\_auto\_minor\_version\_upgrade) | When set to `true`, the cluster will automatically receive minor engine version upgrades after launch. Defaults to `true` | `bool` | `null` | no |
-| <a name="input_create_parameter_group"></a> [create\_parameter\_group](#input\_create\_parameter\_group) | Determines whether to create parameter group specified | `bool` | `true` | no |
-| <a name="input_create_subnet_group"></a> [create\_subnet\_group](#input\_create\_subnet\_group) | Determines whether to create subnet group specified | `bool` | `true` | no |
 | <a name="input_create_users"></a> [create\_users](#input\_create\_users) | Determines whether to create users specified | `bool` | `true` | no |
 | <a name="input_data_tiering"></a> [data\_tiering](#input\_data\_tiering) | Must be set to `true` when using a data tiering node type | `bool` | `null` | no |
 | <a name="input_description"></a> [description](#input\_description) | Description for the cluster. Defaults to `Managed by Terraform` | `string` | `null` | no |
@@ -26,11 +23,8 @@
 | <a name="input_node_type"></a> [node\_type](#input\_node\_type) | The compute and memory capacity of the nodes in the cluster. See AWS documentation on [supported node types](https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.supportedtypes.html) as well as [vertical scaling](https://docs.aws.amazon.com/memorydb/latest/devguide/cluster-vertical-scaling.html) | `string` | `null` | no |
 | <a name="input_num_replicas_per_shard"></a> [num\_replicas\_per\_shard](#input\_num\_replicas\_per\_shard) | The number of replicas to apply to each shard, up to a maximum of 5. Defaults to `1` (i.e. 2 nodes per shard) | `number` | `null` | no |
 | <a name="input_num_shards"></a> [num\_shards](#input\_num\_shards) | The number of shards in the cluster. Defaults to `1` | `number` | `null` | no |
-| <a name="input_parameter_group_description"></a> [parameter\_group\_description](#input\_parameter\_group\_description) | Description for the parameter group. Defaults to `Managed by Terraform` | `string` | `null` | no |
 | <a name="input_parameter_group_family"></a> [parameter\_group\_family](#input\_parameter\_group\_family) | The engine version that the parameter group can be used with | `string` | `null` | no |
 | <a name="input_parameter_group_parameters"></a> [parameter\_group\_parameters](#input\_parameter\_group\_parameters) | A list of parameter maps to apply | `list(map(string))` | `[]` | no |
-| <a name="input_parameter_group_tags"></a> [parameter\_group\_tags](#input\_parameter\_group\_tags) | Additional tags for the parameter group created | `map(string)` | `{}` | no |
-| <a name="input_parameter_group_use_name_prefix"></a> [parameter\_group\_use\_name\_prefix](#input\_parameter\_group\_use\_name\_prefix) | Determines whether `parameter_group_name` is used as a prefix | `bool` | `false` | no |
 | <a name="input_password"></a> [password](#input\_password) | The password for the AWS MemoryDB user. Leave empty to generate a random password. | `string` | `""` | no |
 | <a name="input_port"></a> [port](#input\_port) | The port number on which each of the nodes accepts connections. Defaults to `6379` | `number` | `null` | no |
 | <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | Set of VPC Security Group ID-s to associate with this cluster | `list(string)` | `null` | no |
@@ -38,8 +32,6 @@
 | <a name="input_snapshot_name"></a> [snapshot\_name](#input\_snapshot\_name) | The name of a snapshot from which to restore data into the new cluster | `string` | `null` | no |
 | <a name="input_snapshot_retention_limit"></a> [snapshot\_retention\_limit](#input\_snapshot\_retention\_limit) | The number of days for which MemoryDB retains automatic snapshots before deleting them. When set to `0`, automatic backups are disabled. Defaults to `0` | `number` | `null` | no |
 | <a name="input_snapshot_window"></a> [snapshot\_window](#input\_snapshot\_window) | The daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your shard. Example: `05:00-09:00` | `string` | `null` | no |
-| <a name="input_subnet_group_description"></a> [subnet\_group\_description](#input\_subnet\_group\_description) | Description for the subnet group. Defaults to `Managed by Terraform` | `string` | `null` | no |
-| <a name="input_subnet_group_use_name_prefix"></a> [subnet\_group\_use\_name\_prefix](#input\_subnet\_group\_use\_name\_prefix) | Determines whether `subnet_group_name` is used as a prefix | `bool` | `false` | no |
 | <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | Set of VPC Subnet ID-s for the subnet group. At least one subnet must be provided | `list(string)` | `[]` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to use on all resources | `map(string)` | `{}` | no |
 | <a name="input_tls_enabled"></a> [tls\_enabled](#input\_tls\_enabled) | A flag to enable in-transit encryption on the cluster. When set to `false`, the `acl_name` must be `open-access`. Defaults to `true` | `bool` | `null` | no |
