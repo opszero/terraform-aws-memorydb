@@ -35,7 +35,7 @@ resource "aws_memorydb_cluster" "this" {
   snapshot_window          = var.snapshot_window
   final_snapshot_name      = "${var.name}-final"
 
-  tags = module.labels.tags
+  tags = var.tags
 }
 
 
