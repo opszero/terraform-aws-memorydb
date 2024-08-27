@@ -106,7 +106,7 @@ resource "aws_memorydb_acl" "this" {
 
 resource "aws_memorydb_parameter_group" "this" {
   name        = var.name
-  description = var.parameter_group_description
+  description = var.description
   family      = var.parameter_group_family
 
   dynamic "parameter" {
