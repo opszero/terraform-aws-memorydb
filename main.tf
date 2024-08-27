@@ -130,7 +130,7 @@ resource "aws_memorydb_parameter_group" "this" {
 
 resource "aws_memorydb_subnet_group" "this" {
   name        = var.name
-  description = var.subnet_group_description
+  description = var.description
   subnet_ids  = var.subnet_ids
 
   lifecycle {
