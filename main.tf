@@ -43,7 +43,7 @@ resource "aws_sns_topic" "main" {
   name              = var.name
   kms_master_key_id = "alias/aws/sns"
 
-  tags = module.labels.tags
+  tags = var.tags
 }
 #################### secretsmanager  ############
 
@@ -80,7 +80,7 @@ resource "aws_memorydb_user" "this" {
     passwords = [aws_secretsmanager_secret_version.memorydb_password_version[each.key].secret_string]
   }
 
-  tags = module.labels.tags
+  tags = var.tags
 }
 
 
@@ -97,7 +97,7 @@ resource "aws_memorydb_acl" "this" {
     create_before_destroy = true
   }
 
-  tags = module.labels.tags
+  tags = var.tags
 }
 
 ################################################################################
@@ -121,7 +121,7 @@ resource "aws_memorydb_parameter_group" "this" {
     create_before_destroy = true
   }
 
-  tags = module.labels.tags
+  tags = var.tags
 }
 
 ################################################################################
@@ -137,5 +137,5 @@ resource "aws_memorydb_subnet_group" "this" {
     create_before_destroy = true
   }
 
-  tags = module.labels.tags
+  tags = var.tags
 }
