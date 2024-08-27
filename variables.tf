@@ -20,6 +20,12 @@ variable "description" {
   default     = null
 }
 
+variable "password" {
+  type        = string
+  default     = ""
+  description = "The password for the AWS MemoryDB user. Leave empty to generate a random password."
+}
+
 variable "engine_version" {
   description = "Version number of the Redis engine to be used for the cluster. Downgrades are not supported"
   type        = string
@@ -142,33 +148,9 @@ variable "acl_user_names" {
   default     = []
 }
 
-variable "acl_tags" {
-  description = "Additional tags for the ACL created"
-  type        = map(string)
-  default     = {}
-}
-
 ################################################################################
 # Parameter Group
 ################################################################################
-
-variable "create_parameter_group" {
-  description = "Determines whether to create parameter group specified"
-  type        = bool
-  default     = true
-}
-
-variable "parameter_group_use_name_prefix" {
-  description = "Determines whether `parameter_group_name` is used as a prefix"
-  type        = bool
-  default     = false
-}
-
-variable "parameter_group_description" {
-  description = "Description for the parameter group. Defaults to `Managed by Terraform`"
-  type        = string
-  default     = null
-}
 
 variable "parameter_group_family" {
   description = "The engine version that the parameter group can be used with"
@@ -182,33 +164,10 @@ variable "parameter_group_parameters" {
   default     = []
 }
 
-variable "parameter_group_tags" {
-  description = "Additional tags for the parameter group created"
-  type        = map(string)
-  default     = {}
-}
-
 ################################################################################
 # Subnet Group
 ################################################################################
 
-variable "create_subnet_group" {
-  description = "Determines whether to create subnet group specified"
-  type        = bool
-  default     = true
-}
-
-variable "subnet_group_use_name_prefix" {
-  description = "Determines whether `subnet_group_name` is used as a prefix"
-  type        = bool
-  default     = false
-}
-
-variable "subnet_group_description" {
-  description = "Description for the subnet group. Defaults to `Managed by Terraform`"
-  type        = string
-  default     = null
-}
 
 variable "subnet_ids" {
   description = "Set of VPC Subnet ID-s for the subnet group. At least one subnet must be provided"
@@ -216,8 +175,4 @@ variable "subnet_ids" {
   default     = []
 }
 
-variable "password" {
-  type        = string
-  default     = ""
-  description = "The password for the AWS MemoryDB user. Leave empty to generate a random password."
-}
+
