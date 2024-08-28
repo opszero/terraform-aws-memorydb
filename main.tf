@@ -52,7 +52,7 @@ resource "aws_ssm_parameter" "memorydb_password" {
 
   type = "SecureString"
 
-  name  = "memorydb/${var.name}/${each.value.user_name}/password"
+  name  = "/memorydb/${var.name}/${each.value.user_name}/password"
   value = var.password == "" ? random_password.main.result : var.password
 }
 
