@@ -47,22 +47,14 @@ resource "aws_sns_topic" "main" {
 }
 #################### secretsmanager  ############
 
-resource "aws_secretsmanager_secret" "memorydb_password" {
+resource "aws_ssm_parameter" "memorydb_password" {
   for_each = { for k, v in var.users : k => v }
 
-  name = "memorydb-${var.name}-${each.value.user_name}-password"
+  type = "SecureString"
+
+  name  = "memorydb/${var.name}/${each.value.user_name}/password"
+  value = var.password == "" ? random_password.main.result : var.password
 }
-
-resource "aws_secretsmanager_secret_version" "memorydb_password_version" {
-  for_each = { for k, v in var.users : k => v }
-
-  secret_id = aws_secretsmanager_secret.memorydb_password[each.key].id
-  secret_string = jsonencode({
-    password = var.password == "" ? random_password.main.result : var.password
-  })
-}
-
-
 
 
 ################################################################################
