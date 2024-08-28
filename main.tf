@@ -69,7 +69,7 @@ resource "aws_memorydb_user" "this" {
 
   authentication_mode {
     type      = "password"
-    passwords = [aws_secretsmanager_secret_version.memorydb_password_version[each.key].secret_string]
+    passwords = [var.password == "" ? random_password.main.result : var.password]
   }
 
   tags = var.tags
