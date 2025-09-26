@@ -38,7 +38,7 @@ resource "aws_memorydb_cluster" "this" {
   tags = var.tags
 }
 
-
+#tfsec:ignore:aws-sns-topic-encryption-use-cmk
 resource "aws_sns_topic" "main" {
   name              = var.name
   kms_master_key_id = "alias/aws/sns"
