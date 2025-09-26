@@ -14,7 +14,7 @@ variable "name" {
   default     = ""
 }
 
-variable "description" {
+variable "parameter_group_description" {
   description = "Description for the cluster. Defaults to `Managed by Terraform`"
   type        = string
   default     = null
@@ -119,13 +119,6 @@ variable "data_tiering" {
 ################################################################################
 # User(s)
 ################################################################################
-
-variable "create_users" {
-  description = "Determines whether to create users specified"
-  type        = bool
-  default     = true
-}
-
 variable "users" {
   description = "A map of user definitions (maps) to be created"
   type        = any
@@ -135,12 +128,6 @@ variable "users" {
 ################################################################################
 # ACL
 ################################################################################
-
-variable "acl_use_name_prefix" {
-  description = "Determines whether `acl_name` is used as a prefix"
-  type        = bool
-  default     = false
-}
 
 variable "acl_user_names" {
   description = "List of externally created user names to associate with the ACL"
@@ -175,4 +162,32 @@ variable "subnet_ids" {
   default     = []
 }
 
+variable "parameter_group_name" {
+  description = "The name of the parameter group to be created or used."
+  type        = string
+  default     = null
+}
 
+variable "acl_name" {
+  description = "The name of the access control list (ACL) to associate."
+  type        = string
+  default     = null
+}
+
+variable "subnet_group_tags" {
+  description = "A map of tags to assign to the subnet group."
+  type        = map(string)
+  default     = {}
+}
+
+variable "parameter_group_tags" {
+  description = "A map of tags to assign to the parameter group."
+  type        = map(string)
+  default     = {}
+}
+
+variable "subnet_group_name" {
+  description = "The name of the subnet group to be created or used."
+  type        = string
+  default     = null
+}

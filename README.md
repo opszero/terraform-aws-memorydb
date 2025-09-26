@@ -1,3 +1,90 @@
+# Terraform-aws-memorydb
+
+# Terraform AWS Cloud MemoryDB Module
+
+## Table of Contents
+- [Introduction](#introduction)
+- [Usage](#usage)
+- [Examples](#Examples)
+- [Author](#Author)
+- [License](#license)
+- [Inputs](#inputs)
+- [Outputs](#outputs)
+
+## Introduction
+This Terraform module creates an AWS memorydb along with additional configuration options.
+## Usage
+To use this module, you can include it in your Terraform configuration. Here's an example of how to use it:
+
+## Example: memorydb
+
+```hcl
+module "memorydb" {
+  source                     = "git::https://github.com/opszero/terraform-aws-memorydb.git?ref=v1.0.1"
+  name                       = "memorydb"
+  engine_version             = "6.2"
+  auto_minor_version_upgrade = true
+  node_type                  = "db.t4g.medium"
+  num_shards                 = 1
+  num_replicas_per_shard     = 1
+  data_tiering               = false
+
+  tls_enabled              = true
+  security_group_ids       = [module.security_group.security_group_id]
+  maintenance_window       = "sun:23:00-mon:01:30"
+  snapshot_retention_limit = 7
+  snapshot_window          = "05:00-09:00"
+  password                 = ""
+
+  # Users
+  users = {
+    admin = {
+      user_name     = "admin-user"
+      access_string = "on ~* &* +@all"
+      tags          = { user = "admin" }
+    }
+    readonly = {
+      user_name     = "readonly-user"
+      access_string = "on ~* &* -@all +@read"
+      tags          = { user = "readonly" }
+    }
+  }
+
+  # ACL
+  acl_name = "memorydb-acl"
+  # Parameter group
+  parameter_group_name        = "memorydb-param-group"
+  parameter_group_description = "Example MemoryDB parameter group"
+  parameter_group_family      = "memorydb_redis6"
+  parameter_group_parameters = [
+    {
+      name  = "activedefrag"
+      value = "yes"
+    }
+  ]
+  parameter_group_tags = {
+    parameter_group = "custom"
+  }
+
+  # Subnet group
+  subnet_group_name = "memorydb-subnet-group"
+  subnet_ids        = module.subnets.public_subnet_id
+  subnet_group_tags = {
+    subnet_group = "custom"
+  }
+
+}
+```
+
+## Examples
+For detailed examples on how to use this module, please refer to the [Examples](https://github.com/opszero/terraform-aws-memorydb/tree/main/example) directory within this repository.
+
+## Author
+Your Name Replace **MIT** and **opsZero** with the appropriate license and your information. Feel free to expand this README with additional details or usage instructions as needed for your specific use case.
+
+## License
+This project is licensed under the **MIT** License - see the [LICENSE](https://github.com/opszero/terraform-aws-memorydb/blob/main/LICENSE) file for details.
+
 <!-- BEGIN_TF_DOCS -->
 
 ## Providers

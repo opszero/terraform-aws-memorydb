@@ -9,7 +9,7 @@ resource "random_password" "main" {
 
 resource "aws_memorydb_cluster" "this" {
   name        = var.name
-  description = var.description
+  description = var.parameter_group_description
 
   engine_version             = var.engine_version
   auto_minor_version_upgrade = var.auto_minor_version_upgrade
@@ -17,14 +17,14 @@ resource "aws_memorydb_cluster" "this" {
   node_type                  = var.node_type
   num_shards                 = var.num_shards
   num_replicas_per_shard     = var.num_replicas_per_shard
-  parameter_group_name       = var.name
+  parameter_group_name       = var.parameter_group_name
   data_tiering               = var.data_tiering
 
-  acl_name           = var.name
+  acl_name           = var.acl_name
   kms_key_arn        = var.kms_key_arn
   tls_enabled        = var.tls_enabled
   security_group_ids = var.security_group_ids
-  subnet_group_name  = var.name
+  subnet_group_name  = var.subnet_group_name
 
   maintenance_window = var.maintenance_window
   sns_topic_arn      = aws_sns_topic.main.arn
@@ -98,7 +98,7 @@ resource "aws_memorydb_acl" "this" {
 
 resource "aws_memorydb_parameter_group" "this" {
   name        = var.name
-  description = var.description
+  description = var.parameter_group_description
   family      = var.parameter_group_family
 
   dynamic "parameter" {
@@ -113,7 +113,7 @@ resource "aws_memorydb_parameter_group" "this" {
     create_before_destroy = true
   }
 
-  tags = var.tags
+  tags = var.parameter_group_tags
 }
 
 ################################################################################
@@ -122,12 +122,12 @@ resource "aws_memorydb_parameter_group" "this" {
 
 resource "aws_memorydb_subnet_group" "this" {
   name        = var.name
-  description = var.description
+  description = var.parameter_group_description
   subnet_ids  = var.subnet_ids
 
   lifecycle {
     create_before_destroy = true
   }
 
-  tags = var.tags
+  tags = var.subnet_group_tags
 }
